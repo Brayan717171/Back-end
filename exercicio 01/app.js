@@ -18,10 +18,11 @@ entradaDeDados.question('Favor digitar o seu nome:', function(nomeUsuario){
         
             entradaDeDados.question('Favor digitar terceiro numero: ', function(numero3){
                 
-                
+                var soma = Number(numero1) + Number(numero2) + Number(numero3)
+
                 console.log('-------------------------------------------')
                 console.log(`Olá  ${nomeUsuario}`)
-                console.log(`A soma dos numeros são:  ${Number(numero1) + Number(numero2) + Number(numero3)} `)
+                console.log(`A soma dos numeros são:  ${soma} `)
                 console.log('-------------------------------------------')
         
             })
