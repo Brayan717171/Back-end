@@ -77,10 +77,29 @@ entradaDeDados.question('Digite o nome do aluno: ', function(nome){
                         console.log('ERRO: é obrigatório o preenchimento de todos os dados !!!')
                     }else if(nota1 > 100 || nota1 < 0 || nota2 > 100 || nota2 < 0 || nota3 > 100 || nota3 < 0 || nota4 > 100 || nota4 < 0){
                         console.log('ERRO: as notas devem ser entre 0 e 100')
+
+                    //Validação para entradade letras nas notas
+                    //isNan() -> permite validar se o conteúdo da
+                    //Variável tem algum caracter ao invés de número
+
+                    }else if(isNaN(nota1)  || isNaN(nota2)  || isNaN(nota3) || isNaN(nota4)){
+
+                        console.log('ERRO: Não é possivel calcular a média com as letras nas notas dos alumo!!"!')
+
                     }else{
+                        /*
+                            Conversão de tipos de dados
+                            parseInt() - > Permite converter uma String para numero Inteiro
+                            parseFloat() - > Permite converter uma String para numero Decimal
+                            Number() - > Permite converter uma String para Numero (INTEIRO OU FLOAT)
+                            String() -> Permite converter um conteudo para STRING
+                            Boolean() -> Permite converter um conteudo para BOOLEAN 
+                            Typeof() -> permite verificar o tipo de dados de uma variável
+                        */
+
                         let soma = Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)
                         let media = soma / 4
-                        console.log(`A sua média é ${media} `)
+                        console.log(`O Aluno(a) ${nomeAluno} ficou com a nota ${media.toFixed(2)}`)
                     }
                     
 
