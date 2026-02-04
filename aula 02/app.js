@@ -73,6 +73,16 @@ entradaDeDados.question('Digite o nome do aluno: ', function(nome){
                         NÃO -> NOT -> !
 
                     */
+                    /*
+                            Conversão de tipos de dados
+                            parseInt() - > Permite converter uma String para numero Inteiro
+                            parseFloat() - > Permite converter uma String para numero Decimal
+                            Number() - > Permite converter uma String para Numero (INTEIRO OU FLOAT)
+                            String() -> Permite converter um conteudo para STRING
+                            Boolean() -> Permite converter um conteudo para BOOLEAN 
+                            Typeof() -> permite verificar o tipo de dados de uma variável
+                        */
+
                    //Validação de entrada vazia
                     if(nomeAluno == '' || nota1 ==''|| nota2 ==''||  nota3 ==''||  nota4 ==''){
                         console.log('ERRO: é obrigatório o preenchimento de todos os dados !!!')
@@ -88,28 +98,22 @@ entradaDeDados.question('Digite o nome do aluno: ', function(nome){
                         console.log('ERRO: Não é possivel calcular a média com as letras nas notas dos alumo!!"!')
 
                     }else{
-                        /*
-                            Conversão de tipos de dados
-                            parseInt() - > Permite converter uma String para numero Inteiro
-                            parseFloat() - > Permite converter uma String para numero Decimal
-                            Number() - > Permite converter uma String para Numero (INTEIRO OU FLOAT)
-                            String() -> Permite converter um conteudo para STRING
-                            Boolean() -> Permite converter um conteudo para BOOLEAN 
-                            Typeof() -> permite verificar o tipo de dados de uma variável
-                        */
+                        let statusAluno
 
                         let soma = Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)
                         let media = soma / 4
-                        console.log(`O Aluno(a) ${nomeAluno} ficou com a nota ${media.toFixed(2)}`)
+                        
 
 
                         if(media >= 70 ){
-                            console.log(`Aluno(a) ${nomeAluno} APROVADO!!!`)
+                            statusAluno = (`APROVADO!!!`)
                         }else if(media < 70 && media >= 50){
-                            console.log(`Aluno(a) ${nomeAluno} RECUPERÇÃO`)
+                            statusAluno = (`RECUPERÇÃO`)
                         }else{
-                            console.log(`Aluno(a) ${nomeAluno} REPROVADO!`)
+                            statusAluno = (` REPROVADO!`)
                         }
+
+                        console.log(` ALUNO(a):  ${nomeAluno} \n Média final: ${media.toFixed(2)} \n Status do aluno: ${statusAluno}`)
                     }
                     
                    
