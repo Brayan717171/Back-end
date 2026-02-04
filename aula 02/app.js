@@ -28,6 +28,7 @@
 
 
 */  
+const { log } = require('console')
 const readline = require('readline')
 
 const entradaDeDados = readline.createInterface({
@@ -100,8 +101,18 @@ entradaDeDados.question('Digite o nome do aluno: ', function(nome){
                         let soma = Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)
                         let media = soma / 4
                         console.log(`O Aluno(a) ${nomeAluno} ficou com a nota ${media.toFixed(2)}`)
+
+
+                        if(media >= 70 ){
+                            console.log(`Aluno(a) ${nomeAluno} APROVADO!!!`)
+                        }else if(media < 70 && media >= 50){
+                            console.log(`Aluno(a) ${nomeAluno} RECUPERÇÃO`)
+                        }else{
+                            console.log(`Aluno(a) ${nomeAluno} REPROVADO!`)
+                        }
                     }
                     
+                   
 
 
                 })//Fecha a nota4
