@@ -79,12 +79,15 @@ entradaDeDados.question('Favor digitar o seu nome:', function(nomeUsuario){
                                 let valorAcrecimo = montante - valor
 
                                 // Exibição do Recibo para o usuário
+                                console.log('')
                                 console.log('******************* Viva Moda *******************') 
+                                console.log('')
                                 console.log(`Muito obrigado por realizar a sua compra conosco Sr(a) ${nome}. `)
                                 console.log(`A compra do produto ${produto}, tem um valor de: ${valor}.`)
                                 console.log(`A sua compra será parcelada em ${parcelas} vezes e o Sr(a) pagará: ${montante.toFixed(2)}.`)
                                 console.log(`O acréscimo realizado ao valor de: ${valor} será de ${valorAcrecimo.toFixed(2)}. `)
                                 console.log( `Muito obrigado por escolher a Viva Moda.`)
+                                console.log('')
                                 console.log(`*******************************************************`)
                                 entradaDeDados.close()
                             }
