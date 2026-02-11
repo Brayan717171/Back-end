@@ -33,10 +33,10 @@ entradaDeDados.question('Digite o nome do cliente: ', function(nome){
                 entradaDeDados.question('Digite o tempo para realizar o pagamento: ', function(tempo){
                     let tempoPagamento = tempo
 
-                    //let percentual = Number(taxaCompra) / 100
-                    //let = montante = Number(capitalProduto) * ((1+Number(percentual)) ** Number(tempoPagamento))
+                    //Import da biblioteca que realiza calculos financeiros
+                    let calculos = require('./modulo/calculos')
 
-                    let montante = calcularJurosCompostos(capitalProduto, taxaCompra, tempoPagamento)
+                    let montante = calculos.calcularJurosCompostos(capitalProduto, taxaCompra, tempoPagamento)
                     if(montante){
                         console.log('O montante final é: ' + montante.toFixed(2))
                     }else{
@@ -49,51 +49,3 @@ entradaDeDados.question('Digite o nome do cliente: ', function(nome){
         })
     })
 })
-
-//Criando uma função ara calcular o valor da compra parcelado
-//Método tradicional de criar uma função
-
-function calcularJurosCompostos(valorCompra, taxaJuros, tempoPagto){
-    //Recebe os argumentos da função em variaveis locais
-    //As variáveis (valor, taxa, tempo são numéricas por conta da conversão)
-    //Mas os argumentos (valorCompra, taxaJuros, tempoPagto ainda serão String)
-    let valor = Number(valorCompra)
-    let taxa =Number (taxaJuros)
-    let tempo = Number (tempoPagto)
-
-
-    //valídação para enradas vazias ou de caracteres inválidos
-    if(valorCompra == '' || isNaN(valorCompra || tempoPagto == '' || isNaN(tempoPagto))){
-        console.log('ERRO: Valores de compra ou tempo de pagamento estão incorretos')
-        return false
-    }else{
-        //chama a função para converter o numero em percentual
-    let percentual = calcularPercentual(taxa)
-
-    //Válidação para o erro do percentual na função calcularPercentual()
-    if(percentual){
-        let montante = valor * ((1+percentual)**tempo)
-        return Number (montante.toFixed(2))
-    }else{
-        console.log('ERRO: Valor da taxa está incorreto.')
-        return false
-    }
-    
-    }
-}
-
-function calcularPercentual(numero){
-    let numeroPercentual = Number(numero)
-
-
-    //Validação para verificar se é um número válido
-    if(numero == '' || numero <= 0 || isNaN(numero)){
-        return false // não pode processar
-    }else{
-        //Procedimento do calculo do perentual
-        let percentual = numeroPercentual / 100
-        return  Number(percentual.toFixed(2))
-    }
-
-    
-}
