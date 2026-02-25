@@ -9,7 +9,17 @@
 //toLowerCase() -> Retorna a string minúsculo
 //toUpperCas() -> Retorna a string maiusculo
 
+const validarDados = function(valor1, valor2, operador){
 
+    if(valor1 == '' || isNaN(valor1) || valor2 === '' || isNaN(valor2)){
+        
+        return false
+    }else{
+        
+        return true
+    }
+
+}
 
 // Modelo de função anônima
 // álcular as 4 operações matemáticas
@@ -33,18 +43,18 @@ const calcular = function(numero1, numero2, operador){
         // }else if(operadorMatematico == 'DIVIDIR'){
         //     resultado = valor1 / valor2
         // }
-    switch (key) {
+    switch (operadorMatematico) {
         case 'SOMAR':// if
-            resultado = valor1 + valor2
+            resultado = somar(valor1, valor2)
             break;
         case 'SUBTRAIR':// else if
-            resultado = valor1 - valor2
+            resultado = subtrair(valor1, valor2)
             break;
         case 'MULTIPLICAR':// else if
-            resultado = valor1 * valor2
+            resultado = multiplicar(valor1, valor2)
             break;
         case 'DIVIDIR':// else if
-            resultado = valor1 / valor2
+            resultado = dividir(valor1, valor2)
             break;
 
         default: // else
@@ -64,4 +74,23 @@ const calcular = function(numero1, numero2, operador){
     
 }
 
-console.log(calcular(10,20, 'somar'))
+//Exemplo de funções em SETA (Arrow function)
+///Funções pra realizar as operações matemática
+const somar = (numero1, numero2) => Number(numero1) + Number(numero2)
+
+const subtrair = (numero1, numero2) => Number(numero1) - Number(numero2)
+
+const multiplicar = (numero1, numero2) => Number(numero1) * Number(numero2)
+
+const dividir = (numero1, numero2) => Number(numero1) / Number(numero2)
+
+
+
+module.exports = {
+    calcular,
+    somar,
+    subtrair,
+    multiplicar,
+    dividir,
+    validarDados
+}
