@@ -1,5 +1,5 @@
 /***************************************************
- * Objetivo: Fazer aplicações com diversos calculos
+ * Objetivo: Fazer Imc
  * Data: 27/02/2026
  * Autor: Brayan
  * Versão: 1.0
@@ -21,11 +21,13 @@ entradaDeDados.question('Digite seu peso: ', function (valorPeso) {
     entradaDeDados.question('Digite sua altura: ', function(valorAltura){
         let altura = valorAltura
         
+        let validar = calculos.validarDados(peso,altura)
+
         let resultadoCalculo = calculos.calcularImc(peso, altura)
         
         let resultado = calculos.imc(resultadoCalculo)
 
-        
+
         
     })
 })

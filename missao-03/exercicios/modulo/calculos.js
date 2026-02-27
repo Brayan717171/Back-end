@@ -5,13 +5,13 @@
  * Versão: 1.0
  ***************************************************/
 
-const validarDados = function(valor1, valor2, operador){
+const validarDados = function(valor1, valor2, valor3, valor4, valor5, valor6, valor7){
 
     valor1 = valor1.replace(',', '.');
     valor2 = valor2.replace(',', '.');
 
     if(valor1 == '' || isNaN(valor1) || valor2 === '' || isNaN(valor2)){
-        
+        console.log('ERRO: Não é possivel calcular com letras ou vazio')
         return false
     }else{
         
@@ -19,6 +19,7 @@ const validarDados = function(valor1, valor2, operador){
     }
 
 }
+
 
 
 const calcularImc = function(valorPeso, valorAltura){
@@ -75,11 +76,25 @@ const imc = function(resultado1){
     }
 }
 
+const calcularMedia = function(valor1, valor2, valor3, valor4){
+    let nota1 = Number(valor1)
+    let nota2 = Number(valor2)
+    let nota3 = Number(valor3)
+    let nota4 = Number(valor4)
+
+    let media = nota1 + nota2 + nota3 + nota4 
+    let resultado = media / 4
+    
+}
+
+
+
 
 
 module.exports = {
     calcularImc,
     validarDados,
-    imc
+    imc,
+    calcularMedia
 
 }
