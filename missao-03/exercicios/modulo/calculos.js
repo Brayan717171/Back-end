@@ -8,6 +8,7 @@
 const tratativa = require('./tratativa')
 
 
+
 const calcularImc = function(valorPeso, valorAltura){
     let peso = Number(tratativa.formatar(valorPeso));
     let altura = Number(tratativa.formatar(valorAltura));
@@ -49,13 +50,64 @@ const calcularMediaExame = function(mediaAnterior, notaExame) {
     let resultadoExame = (mediaAnt + nota) / 2;
     
     return Number(resultadoExame.toFixed(1));
+}
+
+
+//Função para impromir tabuada usando While
+const gerarTabuada = function(inicial, final, contInicial1, contFinal2){
+    let tabInicial = Number(inicial)
+    let tabFinal = Number(final)
+    let contInicial =  Number(contInicial1)
+    let contFinal=  Number(contFinal2)
+
+    let tabAtual = tabInicial
+
+    while (tabAtual <= tabFinal) {
+        console.log(`\nTabuada do [${tabAtual}]`);
+
+        
+        let cont = contInicial; 
+        while (cont <= contFinal) {
+            let resultado = tabAtual * cont;
+            console.log(`${tabAtual} x ${cont} = ${resultado}`);
+            
+            cont++; // Incrementa o contador interno
+        }
+
+        tabAtual++; // Incrementa a tabuada para ir para a próxima
+    }
+    
+
+}
+const calcularFatorial = function(valorNumero) {
+    let numero = Number(valorNumero);
+    
+    let resultado = 1;
+    let memoriaCalculo = ""; // Para exibir o exemplo (5x4x3x2x1)
+
+    
+    while (numero >= 1) {
+        resultado = resultado * numero;
+        
+        // Monta a string do cálculo para o console
+        memoriaCalculo += (numero === 1) ? `${numero}` : `${numero}x`;
+        
+        numero--; // Decrementa o número
+    }
+
+    console.log(`Fatorial de ${valorNumero} é ${memoriaCalculo} = ${resultado}`);
+    return resultado;
 };
+
 
 // Exporta as funções para serem usadas em outros arquivos
 module.exports = {
     calcularImc,
     calcularMedia,
-    calcularMediaExame
+    calcularMediaExame, 
+    gerarTabuada,
+    calcularFatorial,
+    
 };
 
 

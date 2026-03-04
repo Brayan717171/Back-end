@@ -44,6 +44,28 @@ const validarNotas = function(valor1, valor2, valor3, valor4){
     }
     return true
 }
+
+
+const validarTabuada = function(valorMinimo, valorMaximo) {
+    
+   
+    let tabuadaInicial = Number(formatar(valorMinimo));
+    let tabuadaFinal = Number(formatar(valorMaximo));
+
+    // Validação: Verifica se os valores estão fora do intervalo de 2 a 100
+    if (tabuadaInicial < 2 || tabuadaInicial > 100 || tabuadaFinal < 2 || tabuadaFinal > 100) {
+        console.log('ERRO: As tabuadas devem ser entre 2 e 100.');
+        return false;
+    }
+
+    // Validação extra: Verifica se o valor inicial é maior que o final
+    if (tabuadaInicial > tabuadaFinal) {
+        console.log('ERRO: A tabuada inicial não pode ser maior que a final.');
+        return false;
+    }
+
+    
+};
 const definirArtigoAluno = function(sexo) {
     let genero = String(sexo).toUpperCase();
     if (genero === 'M') {
@@ -111,6 +133,38 @@ const imc = function(resultado1){
 }
 
 
+// Função para validar os Contadores (Inicial e Final)
+const validarContador = function(contInicial, contFinal) {
+    let inicio = Number(formatar(contInicial));
+    let fim = Number(formatar(contFinal));
+
+    // Requisito: Entre 1 e 50
+    if (inicio < 1 || inicio > 50 || fim < 1 || fim > 50) {
+        console.log('ERRO: O valor do contador deverá ser entre 1 e 50.');
+        return false;
+    }
+
+    // Verificação extra: inicial não pode ser maior que final
+    if (inicio > fim) {
+        console.log('ERRO: O contador inicial não pode ser maior que o contador final.');
+        return false;
+    }
+
+    return true;
+}
+
+function validarFatorial(valor){
+
+    let fatorial= Number(formatar(valor));
+
+    if(fatorial === 0){
+        console.log('ERRO: Não existe fatorial de 0')
+    }else if(fatorial <= 1) {
+        console.log('ERRO: Não é possivel calcular o fatorial, digite um número maior que 1')
+    }
+    return true; // SEM ISSO, O CÁLCULO NÃO APARECE
+}
+
 
 
 module.exports = {
@@ -119,5 +173,9 @@ module.exports = {
     validarNotas,
     definirArtigoAluno,
     definirArtigoProfessor,
-    imc
+    imc,
+    validarTabuada,
+    validarContador, 
+    validarFatorial
+    
 };
