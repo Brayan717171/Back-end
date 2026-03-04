@@ -164,7 +164,22 @@ function validarFatorial(valor){
     }
     return true; // SEM ISSO, O CÁLCULO NÃO APARECE
 }
+function validarNumeros(valor1, valor2){
+    let inicial= Number(formatar(valor1));
+    let final= Number(formatar(valor2));
 
+    if(inicial < 0 || inicial > 500){
+        return "ERRO: O número inicial deve estar entre 0 e 500"
+    }
+    if(final < 100 || final > 1000){
+        return "ERRO: O número final deve estar entre 100 e 1000"
+    }
+    if (inicial > final) {
+        return "Erro: O número inicial não pode ser maior que o número final.";
+      }
+    
+      return "Sucesso: Valores válidos!";
+}   
 
 
 module.exports = {
@@ -176,6 +191,7 @@ module.exports = {
     imc,
     validarTabuada,
     validarContador, 
-    validarFatorial
+    validarFatorial, 
+    validarNumeros,
     
 };

@@ -24,7 +24,7 @@ entradaDeDados.question('Número Inicial (entre 0 e 500): ', function(valorDigit
        
 
                 // Chamamos a validação primeiro usando os seus nomes de variáveis
-                if (tratativa.(valorDigitado1, valorDigitado2) && tratativa.validarDados(valorDigitado1, valorDigitado2)) {
+                if (tratativa.validarNumeros(valorDigitado1, valorDigitado2) && tratativa.validarDados(valorDigitado1, valorDigitado2)) {
                         
                         // 2 Se for válido, chamar a função que faz o cálculo
                         
