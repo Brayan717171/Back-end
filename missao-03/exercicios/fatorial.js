@@ -16,7 +16,7 @@ const entradaDeDados = readline.createInterface({
 entradaDeDados.question('Digite um número para calcular o fatorial: ', function(valorDigitado) {
     
     // 1 Validar a entrada (vazio, caracteres, 0 e 1)
-    if (tratativa.validarFatorial(valorDigitado) && tratativa.validarDados) {
+    if (tratativa.validarFatorial(valorDigitado) && tratativa.validarDados(valorDigitado)) {
         
         // 2 Se for válido, chamar a função que faz o cálculo
         calculos.calcularFatorial(valorDigitado);

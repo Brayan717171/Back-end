@@ -15,16 +15,23 @@ const entradaDeDados = readline.createInterface({
 })
 
 
-entradaDeDados.question('Número Inicial (entre 0 e 500): ', function(tabInicial) {
-    let inicial = tabInicial
+entradaDeDados.question('Número Inicial (entre 0 e 500): ', function(valorDigitado1) {
+    let inicial = valorDigitado1
 
-    entradaDeDados.question('Número Final (entre 100 e 1000): ', function(tabFinal) {
-        let final = tabFinal
+    entradaDeDados.question('Número Final (entre 100 e 1000): ', function(valorDigitado2) {
+        let final = valorDigitado2
 
        
 
                 // Chamamos a validação primeiro usando os seus nomes de variáveis
+                if (tratativa.(valorDigitado1, valorDigitado2) && tratativa.validarDados(valorDigitado1, valorDigitado2)) {
+                        
+                        // 2 Se for válido, chamar a função que faz o cálculo
+                        
+                    }
                 
+                    // Fecha a entrada de dados
+                    entradaDeDados.close();
 
                 
            
