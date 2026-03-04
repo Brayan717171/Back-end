@@ -1,67 +1,108 @@
 /***************************************************
- * Objetivo: Fazer Média dos alunos
- * Data: 27/02/2026
+ * Objetivo: Arquivo principal para cálculo de média e tratamento de exame
+ * Data: 04/03/2026
  * Autor: Brayan
- * Versão: 1.0
+ * Versão: 1.2
  ***************************************************/
 
-const calculos = require ('./modulo/calculos')
+const calculos = require('./modulo/calculos');
+const tratativa = require('./modulo/tratativa');
+const readline = require('readline');
 
-const readline = require('readline')
-
-// Cria uma interface para entrada e saída de dados pelo terminal
 const entradaDeDados = readline.createInterface({
     input: process.stdin,
     output: process.stdout
-})
+});
 
+// Início da coleta de dados (Callback Hell organizado)
+entradaDeDados.question('Nome do Aluno: ', function(nome) {
 
-entradaDeDados.question('Digite o nome do aluno: ', function (valorNome) {
-    let nome = valorNome
+    entradaDeDados.question('Nome do Professor: ', function(professor) {
 
-    entradaDeDados.question('Digite o nome do professor: ', function (valorProfessor) {
-        let professor = valorProfessor
+        entradaDeDados.question('Sexo do Aluno [M/F]: ', function(sexoAl) {
 
-        entradaDeDados.question('Digite o sexo do aluno: ',function(valorSexoAl){
-            let sexoAluno = valorSexoAl
+            entradaDeDados.question('Sexo do Professor [M/F]: ', function(sexoPr) {
 
-            entradaDeDados.question('Digite o sexo do Professor: ',function(valorSexoPR){
-                let sexoProfessor = valorSexoPR
+                entradaDeDados.question('Curso: ', function(nomeCurso) {
 
-                entradaDeDados.question('Digite o Nome do curso: ',function(curso){
-                    let nomeCurso = curso
-        
-                    entradaDeDados.question('Digite o Nome da diciplina: ',function(diciplina){
-                        let nomediciplina = diciplina
-            
-                        entradaDeDados.question('Digite a primeira nota: ',function(valor1){
-                            let nota1 = valor1
-                
-                            entradaDeDados.question('Digite a segunda nota: ',function(valor2){
-                                let nota2 = valor2
-                    
-                                entradaDeDados.question('Digite a terceira nota: ',function(valor3){
-                                    let nota3 = valor3
+                    entradaDeDados.question('Disciplina: ', function(nomeDisciplina) {
                         
-                                    entradaDeDados.question('Digite a quarta nota: ',function(valor4){
-                                        let nota4 = valor4
-                                        
+                        entradaDeDados.question('Nota 1: ', function(valor1) {
 
-                                        let validarmedia = calculos.validarDados(nota1, nota2, nota3, nota4)
-                                        
-                                        
+                            entradaDeDados.question('Nota 2: ', function(valor2) {
 
-                                        let resultadoCalculo = calculos.calcularMedia(nota1, nota2, nota3, nota4)
-                                                
-                                        let resultado =console.log(resultadoCalculo)
+                                entradaDeDados.question('Nota 3: ', function(valor3) {
 
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        })
-    })
-})
+                                    entradaDeDados.question('Nota 4: ', function(valor4) {
+
+                                        // 1. Validações Iniciais
+                                        if (tratativa.validarNotas(valor1, valor2, valor3, valor4)) {
+                                            
+                                            // 2. Cálculo da Média Inicial
+                                            let media = calculos.calcularMedia(valor1, valor2, valor3, valor4);
+                                            
+                                            // 3. Definição dos Artigos (O/A)
+                                            let alunoArt = tratativa.definirArtigoAluno(sexoAl);
+                                            let profesorArt = tratativa.definirArtigoProfessor(sexoPr);
+
+                                            
+
+                                            // APROVADO DIRETO
+                                            if (media >= 70) {
+                                                console.log('\nRelatório do aluno:');
+                                                console.log(`${alunoArt} [ ${nome} ] foi [aprovado] na disciplina [ ${nomeDisciplina} ].`);
+                                                console.log(`Curso: ${nomeCurso}`);
+                                                console.log(`${profesorArt}: ${professor}`);
+                                                console.log(`Notas do aluno: ${valor1}, ${valor2}, ${valor3}, ${valor4}`);
+                                                console.log(`Média Final: ${media}`);
+                                                entradaDeDados.close();
+
+                                            // 2. EXAME
+                                            } else if (media >= 50 && media <= 69) {
+                                                console.log(`\n${alunoArt} está de exame. Média: ${media}`);
+
+                                                entradaDeDados.question('Digite a nota do exame: ', function(valorExame) {
+                                                    let mediaExame = calculos.calcularMediaExame(media, valorExame);
+                                                    let statusFinal;
+
+                                                    if (mediaExame >= 60) {
+                                                        statusFinal = 'aprovado';
+                                                    } else {
+                                                        statusFinal = 'reprovado';
+                                                    }
+
+                                                    console.log('\nRelatório do aluno:');
+                                                    console.log(`${alunoArt} [ ${nome} ] foi [${statusFinal}] na disciplina [ ${nomeDisciplina} ].`);
+                                                    console.log(`Curso: ${nomeCurso}`);
+                                                    console.log(`${profesorArt}: ${professor}`);
+                                                    console.log(`Notas do aluno: ${valor1}, ${valor2}, ${valor3}, ${valor4}, ${valorExame}`);
+                                                    console.log(`Média Final: ${media}`);
+                                                    console.log(`Média final do Exame: ${mediaExame}`);
+                                                    
+                                                    entradaDeDados.close();
+                                                });
+
+                                            // 3. REPROVADO DIRETO
+                                            } else {
+                                                console.log('\nRelatório do aluno:');
+                                                console.log(`${alunoArt} [ ${nome} ] foi [reprovado] na disciplina [ ${nomeDisciplina} ].`);
+                                                console.log(`Curso: ${nomeCurso}`);
+                                                console.log(`${profesorArt}: ${professor}`);
+                                                console.log(`Notas do aluno: ${valor1}, ${valor2}, ${valor3}, ${valor4}`);
+                                                console.log(`Média Final: ${media}`);
+                                                entradaDeDados.close();
+                                            }
+
+                                        } else {
+                                            entradaDeDados.close();
+                                        }
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+});

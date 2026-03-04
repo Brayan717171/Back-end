@@ -6,6 +6,7 @@
  ***************************************************/
 
 const calculos = require ('./modulo/calculos')
+const tratativa = require('./modulo/tratativa')
 
 const readline = require('readline')
 
@@ -21,11 +22,11 @@ entradaDeDados.question('Digite seu peso: ', function (valorPeso) {
     entradaDeDados.question('Digite sua altura: ', function(valorAltura){
         let altura = valorAltura
         
-        let validar = calculos.validarDados(peso,altura)
+        let validar = tratativa.validarDados(peso,altura)
 
         let resultadoCalculo = calculos.calcularImc(peso, altura)
         
-        let resultado = calculos.imc(resultadoCalculo)
+        let resultado = tratativa.imc(resultadoCalculo)
 
 
         
