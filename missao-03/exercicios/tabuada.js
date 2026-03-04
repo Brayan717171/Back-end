@@ -14,7 +14,7 @@ const entradaDeDados = readline.createInterface({
     output: process.stdout
 })
 
-// Corrigido apenas o parêntese: question('pergunta', function(variavel) { ... })
+
 entradaDeDados.question('Tabuada Inicial (entre 2 e 100): ', function(tabInicial) {
     let inicial = tabInicial
 
