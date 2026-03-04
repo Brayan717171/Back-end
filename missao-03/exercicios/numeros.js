@@ -15,10 +15,10 @@ const entradaDeDados = readline.createInterface({
 })
 
 
-entradaDeDados.question('Tabuada Inicial (entre 2 e 100): ', function(tabInicial) {
+entradaDeDados.question('Número Inicial (entre 0 e 500): ', function(tabInicial) {
     let inicial = tabInicial
 
-    entradaDeDados.question('Tabuada Final (entre 2 e 100): ', function(tabFinal) {
+    entradaDeDados.question('Número Final (entre 100 e 1000): ', function(tabFinal) {
         let final = tabFinal
 
        
