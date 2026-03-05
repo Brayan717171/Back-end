@@ -12,7 +12,6 @@ function formatar(valor) {
 }
 
 
-
 const validarDados = function(valor1, valor2, valor3, valor4, valor5, valor6, valor7){
 
     valor1 = formatar(valor1)
@@ -29,6 +28,7 @@ const validarDados = function(valor1, valor2, valor3, valor4, valor5, valor6, va
     }
 
 }
+
 const validarNotas = function(valor1, valor2, valor3, valor4){
     // 1. Primeiro formatamos a STRING (troca , por .)
     // 2. Depois convertemos para NUMBER
@@ -164,22 +164,38 @@ function validarFatorial(valor){
     }
     return true; // SEM ISSO, O CÁLCULO NÃO APARECE
 }
-function validarNumeros(valor1, valor2){
-    let inicial= Number(formatar(valor1));
-    let final= Number(formatar(valor2));
+const validarNumeros2 = function(valor1, valor2) {
+    let inicial = Number(valor1);
+    let final = Number(valor2);
 
-    if(inicial < 0 || inicial > 500){
-        return "ERRO: O número inicial deve estar entre 0 e 500"
+    // Regra: Impedir números iguais
+    if (inicial === final) {
+        console.log('ERRO: O número inicial não pode ser igual ao final.');
+        return false;
     }
-    if(final < 100 || final > 1000){
-        return "ERRO: O número final deve estar entre 100 e 1000"
+
+    return true;
+}
+function validarNumeros(valor1, valor2) {
+    let inicial = Number(formatar(valor1));
+    let final = Number(formatar(valor2));
+
+    if (inicial < 0 || inicial > 500) {
+        console.log("ERRO: O número inicial deve estar entre 0 e 500");
+        return false;
+    } 
+    else if (final < 100 || final > 1000) {
+        console.log("ERRO: O número final deve estar entre 100 e 1000");
+        return false;
+    } 
+    else if (inicial >= final) { // Aqui já resolve a regra de "não podem ser iguais" e "não pode ser maior"
+        console.log("ERRO: O número inicial não pode ser maior ou igual ao final.");
+        return false;
     }
-    if (inicial > final) {
-        return "Erro: O número inicial não pode ser maior que o número final.";
-      }
     
-      return "Sucesso: Valores válidos!";
-}   
+    return true; // Se não caiu em nenhum erro, retorna verdadeiro
+}
+
 
 
 module.exports = {
@@ -193,5 +209,7 @@ module.exports = {
     validarContador, 
     validarFatorial, 
     validarNumeros,
+    validarNumeros2,
+
     
 };

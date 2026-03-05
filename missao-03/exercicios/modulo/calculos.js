@@ -21,6 +21,48 @@ const calcularImc = function(valorPeso, valorAltura){
     return Number (resultado.toFixed(1))
     
 }
+const gerarSequencia = function(valor1, valor2) {
+    let inicial = Number(tratativa.formatar(valor1));
+    let final = Number(tratativa.formatar(valor2));
+    
+    
+
+    // Se o inicial for menor, a ordem natural é seguida
+    if (inicial < final) {
+        comeco = inicial;
+        fim = final;
+    } else {
+        
+        comeco = final;
+        fim = inicial;
+    }
+    
+
+        // Variáveis para contar as ocorrências
+    let totalPares = 0;
+    let totalImpares = 0;
+
+    // --- Bloco de Pares ---
+    console.log("\nLista de números Pares");
+    for (let i = comeco; i <= fim; i++) {
+        if (i % 2 === 0) {
+            console.log(i);
+            totalPares++; // Incrementa o contador
+        }
+    }
+    console.log("Qtde de números encontrados: " + totalPares);
+
+   
+    console.log("\nLista de números Impares");
+    for (let i = comeco; i <= fim; i++) {
+        if (i % 2 !== 0) {
+            console.log(i);
+            totalImpares++; // Incrementa o contador
+        }
+    }
+    console.log("Qtde de números encontrados: " + totalImpares);
+    }
+
 
 
 const calcularMedia = function(valor1, valor2, valor3, valor4){
@@ -38,7 +80,7 @@ const calcularMedia = function(valor1, valor2, valor3, valor4){
    
 }
 /**
- * Função para calcular a Média Final (Pós Exame)
+ * Função para calcular a Média Final (Exame)
  */
 const calcularMediaExame = function(mediaAnterior, notaExame) {
     
@@ -53,7 +95,7 @@ const calcularMediaExame = function(mediaAnterior, notaExame) {
 }
 
 
-//Função para impromir tabuada usando While
+//Função para impromir tabuada
 const gerarTabuada = function(inicial, final, contInicial1, contFinal2){
     let tabInicial = Number(inicial)
     let tabFinal = Number(final)
@@ -71,10 +113,10 @@ const gerarTabuada = function(inicial, final, contInicial1, contFinal2){
             let resultado = tabAtual * cont;
             console.log(`${tabAtual} x ${cont} = ${resultado}`);
             
-            cont++; // Incrementa o contador interno
+            cont++; // Incrementa o contador 
         }
 
-        tabAtual++; // Incrementa a tabuada para ir para a próxima
+        tabAtual++; 
     }
     
 
@@ -107,6 +149,7 @@ module.exports = {
     calcularMediaExame, 
     gerarTabuada,
     calcularFatorial,
+    gerarSequencia
     
 };
 
