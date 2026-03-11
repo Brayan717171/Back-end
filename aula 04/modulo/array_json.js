@@ -37,7 +37,7 @@
 
 
 
-const listaDeNome = ['José', 'Maria', 'João', 'André', 'Alex']
+const listaDeNome = ['José', 'Maria', 'João', 'André', 'Alex' ]
 const listaDeClientes = []
 const listaDeFornecedores = []
 
@@ -120,6 +120,77 @@ const manipularDados = function(){
     listaDeFornecedores.push('Zezinho da Silva')
     listaDeFornecedores.push('Huguinho da Silva')
     console.log(listaDeFornecedores)
+
+    
+    //Permite adicionar novos elementos no array sempre no INICIO da lista
+    listaDeFornecedores.unshift('Ana Carolina')
+    console.log(listaDeFornecedores)
+
+    //Permite remover elementos do FINAL da lista
+    listaDeFornecedores.pop()
+    console.table(listaDeFornecedores)
+
+    //Permite remover elementos do INICIO da lista
+    listaDeFornecedores.shift()
+    console.table(listaDeFornecedores)
+
+    //Permite remover um elemento baseado no indice da lista 
+        // splice(indice, quantidade de elementos)
+    listaDeFornecedores.splice(2,1)
+    console.table(listaDeFornecedores)
 }
 
-manipularDados()
+
+const removerItem = function(nome){
+
+//Retorna o indice de um elemento fazendo a busca pelo valor
+let indice = listaDeNome.indexOf(nome)
+if(indice != -1){
+    listaDeNome.splice(indice, 1 )
+    return true
+}else{
+    return false
+}
+
+    // for(indice in listaDeNome){
+    //     if (listaDeNome[indice] == nome) {
+    //         listaDeNome.splice(indice,1)
+            
+    //     }
+    // }
+
+}
+
+
+
+const verificarItem = function(nome){
+
+    //Verifica a existencia de um conteúdo dentro de uma lista (true/false)
+    return listaDeNome.includes(nome)
+    
+}
+
+
+const quantidadeItens = function(nome){
+    let cont = 0
+
+
+    listaDeNome.forEach(function(item){      
+        if(String(item).toUpperCase() == String(nome).toUpperCase())
+            cont +=1
+    })
+    return cont
+
+
+
+}
+
+//exibirDados()
+//manipularDados()
+//console.table(listaDeNome)
+
+// let resposta = removerItem('asda')
+// if(resposta)
+
+console.log(quantidadeItens('José'))
+
