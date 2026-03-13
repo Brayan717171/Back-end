@@ -119,6 +119,8 @@ const manipularDados = function(){
     listaDeFornecedores.push('Luiz da Silva')
     listaDeFornecedores.push('Zezinho da Silva')
     listaDeFornecedores.push('Huguinho da Silva')
+    listaDeFornecedores.push('Luizinho da Silva')
+    listaDeFornecedores.push('André da Silva')
     console.log(listaDeFornecedores)
 
     
@@ -134,9 +136,14 @@ const manipularDados = function(){
     listaDeFornecedores.shift()
     console.table(listaDeFornecedores)
 
-    //Permite remover um elemento baseado no indice da lista 
+    //Splice() -> Permite remover um elemento baseado no indice da lista 
         // splice(indice, quantidade de elementos)
     listaDeFornecedores.splice(2,1)
+    console.table(listaDeFornecedores)
+
+    //Splice() -> Permite Adicionar um novo elemento em um determinado lugar do array (indice)
+                    // Indice 0 -> significa que não será removido ninguem, Novo conteúdo
+    listaDeFornecedores.splice(1,0,'Carlos da silva')
     console.table(listaDeFornecedores)
 }
 
@@ -184,6 +191,114 @@ const quantidadeItens = function(nome){
 
 
 }
+const criandoDadosJSON = function(){
+    let aluno = {
+                 "nome": "José", 
+                 "ra": 123456,
+                 "telefone": "9757574414", 
+                 "email": "jose@gmail.com" 
+                }
+
+    //Exibindo o objeto JSON completo
+    console.log(aluno)
+
+    //Exibindo apenas um atributo do JSON
+    console.log(aluno.nome)
+    console.log(aluno.email)
+    
+    //Adiciona um novo atributo no JSON
+    aluno.sexo = 'Masculino'
+    console.log(aluno)
+
+    delete aluno.telefone
+    console.log(aluno)
+
+}
+
+const cadastroDeProdutos = function (){
+
+    let cores = [
+        { "id": 1,  "cor": "Branco"   }, //Indice 0
+        { "id": 2,  "cor": "Preto"    }, //Indice 1
+        { "id": 3,  "cor": "Azul"     }, //Indice 2
+        { "id": 4,  "cor": "Rosa"     }, //Indice 3
+        { "id": 5,  "cor": "Cinza"    }, //Indice 4
+       
+    ]
+
+    let marcas = [
+        { "id": 1, "modelo": "Dell",       "telefone": "(11) 4004-0100", "email": "suporte@dell.com" },       // Indice 0
+        { "id": 2, "modelo": "LG",         "telefone": "(11) 4004-5400", "email": "suporte@lg.com" },         // Indice 1
+        { "id": 3, "modelo": "Lenovo",     "telefone": "(11) 4004-4717", "email": "suporte@lenovo.com" },     // Indice 2
+        { "id": 4, "modelo": "Apple",      "telefone": "(11) 4004-1779", "email": "suporte@apple.com" },      // Indice 3
+        { "id": 5, "modelo": "Razer",      "telefone": "(11) 4004-7293", "email": "suporte@razer.com" },      // Indice 4
+        { "id": 6, "modelo": "Logitech",   "telefone": "(11) 4004-5644", "email": "suporte@logitech.com" },   // Indice 5
+        { "id": 7, "modelo": "Multilaser", "telefone": "(11) 4004-6588", "email": "suporte@multilaser.com" }, // Indice 6
+    ]
+
+    let produtos = [
+        {
+            "id": 1,
+            "nome": "Monitor",
+            "descricao": "27 polegadas",
+            "marca": [marcas[1]],  
+            "quantidade": 20,
+            "cor": [cores[4], cores[1]],
+            "valor": 800.50
+        },
+        {
+            "id": 2,
+            "nome": "Teclado",
+            "descricao": "Mecânico RGB",
+            "marca": [marcas[5]],   
+            "quantidade": 200,
+            "cor": [cores[0], cores[1]],
+            "valor": 350.00
+        },
+        {
+            "id": 3,
+            "nome": "Mouse",
+            "descricao": "Sem fio 1600 DPI",
+            "marca": [marcas[0], marcas[1], marcas[5]], 
+            "quantidade": 500,
+            "cor": [cores[0], cores[1], cores[4]],
+            "valor": 180.00
+        },
+    ]
+
+    produtos.forEach(function(produto) {
+        console.log(`Produto: ${produto.nome}`)
+        console.log(`Quantidade: ${produto.quantidade}`)
+        console.log(`Valor: ${produto.valor}`)
+
+        produto.cor.forEach(function(c) {
+            console.log(`Cor: ${c.cor}`)
+        })
+
+        produto.marca.forEach(function(m) {
+            console.log(`Modelo: ${m.modelo}`)
+        })
+    
+    })
+    // console.log(cores)
+    //console.table(cores)     
+
+    // produtos[0].cor.forEach(function(nomeCor){
+    //     console.log(`A cor do produto é: ${nomeCor.cor}`)
+    // })
+    // // console.log(cores[2].nome)
+    //console.table(produtos)
+    // console.log(produtos[0].cor[1].cor)
+    
+}   
+
+
+
+
+
+
+
+
 
 //exibirDados()
 //manipularDados()
@@ -191,6 +306,13 @@ const quantidadeItens = function(nome){
 
 // let resposta = removerItem('asda')
 // if(resposta)
+//  console.log('itens removido com sucesso')
+//
+// else
+//  console.log('Não foram encontrados itens para ser removido')
 
-console.log(quantidadeItens('José'))
 
+//console.log(quantidadeItens('José'))
+
+//criandoDadosJSON()
+cadastroDeProdutos()
