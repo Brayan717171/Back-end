@@ -28,7 +28,7 @@ entradaDeDados.question('Tabuada Inicial (entre 2 e 100): ', function(tabInicial
                 let contFinal2 = contFinal
 
                 // Chamamos a validação primeiro usando os seus nomes de variáveis
-                if (tratativa.validarDados (inicial, final, contInicial1, contFinal2) && tratativa.validarTabuada(inicial, final)) {
+                if (tratativa.validarDados (inicial, final, contInicial1, contFinal2) || tratativa.validarTabuada(inicial, final)) {
 
 
                     if(tratativa.validarContador (contInicial1, contFinal2)){

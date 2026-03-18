@@ -227,13 +227,13 @@ const cadastroDeProdutos = function (){
     ]
 
     let marcas = [
-        { "id": 1, "modelo": "Dell",       "telefone": "(11) 4004-0100", "email": "suporte@dell.com" },       // Indice 0
-        { "id": 2, "modelo": "LG",         "telefone": "(11) 4004-5400", "email": "suporte@lg.com" },         // Indice 1
-        { "id": 3, "modelo": "Lenovo",     "telefone": "(11) 4004-4717", "email": "suporte@lenovo.com" },     // Indice 2
-        { "id": 4, "modelo": "Apple",      "telefone": "(11) 4004-1779", "email": "suporte@apple.com" },      // Indice 3
-        { "id": 5, "modelo": "Razer",      "telefone": "(11) 4004-7293", "email": "suporte@razer.com" },      // Indice 4
-        { "id": 6, "modelo": "Logitech",   "telefone": "(11) 4004-5644", "email": "suporte@logitech.com" },   // Indice 5
-        { "id": 7, "modelo": "Multilaser", "telefone": "(11) 4004-6588", "email": "suporte@multilaser.com" }, // Indice 6
+        { "id": 1, "marca": "Dell",       "telefone": "(11) 4004-0100", "email": "suporte@dell.com" },       // Indice 0
+        { "id": 2, "marca": "LG",         "telefone": "(11) 4004-5400", "email": "suporte@lg.com" },         // Indice 1
+        { "id": 3, "marca": "Lenovo",     "telefone": "(11) 4004-4717", "email": "suporte@lenovo.com" },     // Indice 2
+        { "id": 4, "marca": "Apple",      "telefone": "(11) 4004-1779", "email": "suporte@apple.com" },      // Indice 3
+        { "id": 5, "marca": "Razer",      "telefone": "(11) 4004-7293", "email": "suporte@razer.com" },      // Indice 4
+        { "id": 6, "marca": "Logitech",   "telefone": "(11) 4004-5644", "email": "suporte@logitech.com" },   // Indice 5
+        { "id": 7, "marca": "Multilaser", "telefone": "(11) 4004-6588", "email": "suporte@multilaser.com" }, // Indice 6
     ]
 
     let produtos = [
@@ -266,20 +266,34 @@ const cadastroDeProdutos = function (){
         },
     ]
 
+    //Percorre o objeto de produto para trazer od dados de cada produto
     produtos.forEach(function(produto) {
+        console.log(`----------------------------------------------`)
         console.log(`Produto: ${produto.nome}`)
         console.log(`Quantidade: ${produto.quantidade}`)
         console.log(`Valor: ${produto.valor}`)
 
+        //Percorre o objetivo de marca da cada produto  para trazer as marcas
         produto.cor.forEach(function(c) {
             console.log(`Cor: ${c.cor}`)
+            
         })
 
+        //Percorre o objeto de cor da cada produto  para trazer as cores
         produto.marca.forEach(function(m) {
-            console.log(`Modelo: ${m.modelo}`)
+            console.log(`Modelo: ${m.marca}`)
+            
         })
+
+       
     
     })
+
+
+
+
+
+    
     // console.log(cores)
     //console.table(cores)     
 
@@ -287,8 +301,64 @@ const cadastroDeProdutos = function (){
     //     console.log(`A cor do produto é: ${nomeCor.cor}`)
     // })
     // // console.log(cores[2].nome)
-    //console.table(produtos)
+    //console.log(produtos)
     // console.log(produtos[0].cor[1].cor)
+
+
+
+
+
+
+
+
+    //Pesquisando meu produto pelo nome 
+    console.log(`--------------------------------------------------`)
+
+    console.log('Pesquisando produtos pelo nome')
+
+    let nome = 'Teclado'
+
+    produtos.forEach(function(itemProduto){
+        if(String(itemProduto.nome).toLocaleUpperCase() == String(nome).toLocaleUpperCase()){
+            console.log(itemProduto)
+        }
+    })
+
+    //Pesquisando um produto pela cor
+
+    console.log(`--------------------------------------------------`)
+console.log('Pesquisando produtos pela cor')
+
+// Define a cor que será pesquisada
+let cor = 'branco'
+
+// Flag de controle: indica se algum produto foi encontrado
+let status = false
+
+// Percorre cada produto da lista
+produtos.forEach(function(itemProduto){
+
+    // Percorre o array de cores do produto atual
+    itemProduto.cor.forEach(function(itemCor){
+
+        // Compara a cor do produto com a cor pesquisada (ignorando maiúsculas/minúsculas)
+        if(String(itemCor.cor).toLocaleUpperCase() == String(cor).toLocaleUpperCase()){
+            
+            // Exibe o produto completo caso a cor seja encontrada
+            console.log(itemProduto)
+
+            // Atualiza a flag indicando que pelo menos um produto foi encontrado
+            status = true
+        }
+        
+    })
+    
+})
+
+// Caso nenhum produto tenha sido encontrado com a cor pesquisada, exibe mensagem de aviso
+if(!status)
+    console.log(`Item pesquisado não foi encontrado....`)
+    
     
 }   
 
@@ -315,4 +385,5 @@ const cadastroDeProdutos = function (){
 //console.log(quantidadeItens('José'))
 
 //criandoDadosJSON()
-cadastroDeProdutos()
+//cadastroDeProdutos()
+

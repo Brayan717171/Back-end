@@ -27,13 +27,13 @@ entradaDeDados.question('Nome do Aluno: ', function(nome) {
 
                     entradaDeDados.question('Disciplina: ', function(nomeDisciplina) {
                         
-                        entradaDeDados.question('Nota 1: ', function(valor1) {
+                        entradaDeDados.question('Nota 1 (0 a 100): ', function(valor1) {
 
-                            entradaDeDados.question('Nota 2: ', function(valor2) {
+                            entradaDeDados.question('Nota 2 (0 a 100): ', function(valor2) {
 
-                                entradaDeDados.question('Nota 3: ', function(valor3) {
+                                entradaDeDados.question('Nota 3 (0 a 100): ', function(valor3) {
 
-                                    entradaDeDados.question('Nota 4: ', function(valor4) {
+                                    entradaDeDados.question('Nota 4 (0 a 100): ', function(valor4) {
 
                                         // 1. Validações Iniciais
                                         if (tratativa.validarNotas(valor1, valor2, valor3, valor4)) {

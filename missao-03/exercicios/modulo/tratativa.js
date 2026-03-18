@@ -12,7 +12,7 @@ function formatar(valor) {
 }
 
 
-const validarDados = function(valor1, valor2, valor3, valor4, valor5, valor6, valor7){
+const validarDados = function(valor1, valor2, valor3, valor4){
 
     valor1 = formatar(valor1)
     valor2 = formatar(valor2)
@@ -29,9 +29,10 @@ const validarDados = function(valor1, valor2, valor3, valor4, valor5, valor6, va
 
 }
 
+
 const validarNotas = function(valor1, valor2, valor3, valor4){
-    // 1. Primeiro formatamos a STRING (troca , por .)
-    // 2. Depois convertemos para NUMBER
+    
+    
     let nota1 = Number(formatar(valor1))
     let nota2 = Number(formatar(valor2))
     let nota3 = Number(formatar(valor3))
@@ -64,7 +65,7 @@ const validarTabuada = function(valorMinimo, valorMaximo) {
         return false;
     }
 
-    
+    return true;
 };
 const definirArtigoAluno = function(sexo) {
     let genero = String(sexo).toUpperCase();
@@ -159,10 +160,13 @@ function validarFatorial(valor){
 
     if(fatorial === 0){
         console.log('ERRO: Não existe fatorial de 0')
+        return false; 
+
     }else if(fatorial <= 1) {
         console.log('ERRO: Não é possivel calcular o fatorial, digite um número maior que 1')
+        return false; 
     }
-    return true; // SEM ISSO, O CÁLCULO NÃO APARECE
+    return true; 
 }
 const validarNumeros2 = function(valor1, valor2) {
     let inicial = Number(valor1);
