@@ -1,10 +1,3 @@
-/***************************************************
- * Objetivo: Manipular dados usando array e json
- * Data: 01/04/2026
- * Autor: Brayan
- * Versão: 1.0 (adaptado para API)
- ***************************************************/
-
 const estadosCidades = require('./estados_cidades');
 
 const getListaDeEstados = function(){
@@ -16,10 +9,10 @@ const getListaDeEstados = function(){
 };
 
 const getDadosEstado = function(uf){
-    let dadosEstado = {};
+    let dadosEstado = false;                                                     // ← false
     estadosCidades.estados.forEach(function(estado){
         if(estado.sigla.toLocaleUpperCase() == uf.toLocaleUpperCase()){
-            dadosEstado = {
+            dadosEstado = {                                                       // ← achou: vira objeto
                 uf: estado.sigla,
                 descricao: estado.nome,
                 capital: estado.capital,
@@ -31,10 +24,10 @@ const getDadosEstado = function(uf){
 };
 
 const getCapitalEstado = function(uf){
-    let dadosCapital = {};
+    let dadosCapital = false;                                                     // ← false
     estadosCidades.estados.forEach(function(estado){
         if(estado.sigla.toLocaleUpperCase() == uf.toLocaleUpperCase()){
-            dadosCapital = {
+            dadosCapital = {                                                       // ← achou: vira objeto
                 uf: estado.sigla,
                 descricao: estado.nome,
                 capital: estado.capital
@@ -45,9 +38,10 @@ const getCapitalEstado = function(uf){
 };
 
 const getEstadosRegiao = function(regiao){
-    let dadosRegiao = { regiao: '', estados: [] };
+    let dadosRegiao = false;                                                      // ← false
     estadosCidades.estados.forEach(function(estado){
         if(estado.regiao.toLocaleUpperCase() == regiao.toLocaleUpperCase()){
+            if(!dadosRegiao) dadosRegiao = { regiao: '', estados: [] };           // ← inicializa na primeira entrada
             dadosRegiao.regiao = estado.regiao;
             dadosRegiao.estados.push({ uf: estado.sigla, descricao: estado.nome });
         }
@@ -56,9 +50,10 @@ const getEstadosRegiao = function(regiao){
 };
 
 const getCapitalPais = function(){
-    let dadosCapitalPais = { capitais: [] };
+    let dadosCapitalPais = false;                                                 // ← false
     estadosCidades.estados.forEach(function(estado){
         if(estado.capital_pais){
+            if(!dadosCapitalPais) dadosCapitalPais = { capitais: [] };            // ← inicializa na primeira entrada
             dadosCapitalPais.capitais.push({
                 capital_atual: estado.capital_pais.capital,
                 uf: estado.sigla,
@@ -74,14 +69,14 @@ const getCapitalPais = function(){
 };
 
 const getCidades = function(uf){
-    let dadosCidades = { cidades: [] };
+    let dadosCidades = false;                                                     // ← false
     estadosCidades.estados.forEach(function(estado){
         if(estado.sigla.toLocaleUpperCase() == uf.toLocaleUpperCase()){
             let listaNomes = [];
             estado.cidades.forEach(function(item) {
                 listaNomes.push(item.nome);
             });
-            dadosCidades = {
+            dadosCidades = {                                                       // ← achou: vira objeto
                 uf: estado.sigla,
                 descricao: estado.nome,
                 quantidade_cidades: estado.cidades.length,
@@ -92,7 +87,6 @@ const getCidades = function(uf){
     return dadosCidades;
 };
 
-// Exportando todas as funções para o app.js usar
 module.exports = {
     getListaDeEstados,
     getDadosEstado,
