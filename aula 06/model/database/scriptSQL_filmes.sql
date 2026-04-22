@@ -44,4 +44,16 @@ values (
 			#todos os values deve ser colado entre ''(simples) menos do tipo INT
 
 #Seleciona todas as colunas da tbl_filme, trás todos os dados da tabela
-select * from tbl_filme
+select * from tbl_filme;
+
+-- delete pelo id do que você quer remover 
+DELETE FROM tbl_filme WHERE id = 6;
+
+-- Atualiza o ID do registro desejado
+-- WHERE id = 4        → identifica o registro atual (The Circus)
+-- SET id = 2          → define o novo ID que será atribuído
+--  O novo ID (2) não pode estar em uso por outro registro, senão dará erro de chave duplicada
+UPDATE tbl_filme SET id = 3 WHERE id = 5;
+
+
+desc tbl_filme;
