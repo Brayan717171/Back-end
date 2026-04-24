@@ -58,6 +58,27 @@ app.post('/v1/senai/locadora/filme', bodyParserJSON , async function (req, res){
 })
 
 
+app.get('/v1/senai/locadora/filme', async function (req, res){
+
+  let result = await controllerFilme.listarFilme()
+
+  res.status(result.status_code)
+  res.json(result)
+   
+
+})
+
+app.get('/v1/senai/locadora/filme/:id', async function (req, res){
+    let id = req.params.id
+    
+    let result = await controllerFilme.buscarFilme(id)
+  
+    res.status(result.status_code)
+    res.json(result)
+     
+  
+  })
+
 app.use(cors(corsOption));
 const PORT = process.env.PORT || 8080;
 

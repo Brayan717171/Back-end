@@ -14,12 +14,15 @@ const filmeDAO = require('../../model/DAO/filme/filme.js')
 
 
 const inseirNovoFilme = async function (filme, contentType) {
-    try {
-        
-        
+    
         // Clona o objeto de mensagens para evitar mutação do objeto original importado
         // Isso garante que alterações feitas aqui não afetam outras chamadas da função
         let messageJson = JSON.parse(JSON.stringify(config_message))
+
+    try {
+        
+        
+        
 
         if(String(contentType).toUpperCase() == 'APPLICATION/JSON'){
 
@@ -72,12 +75,19 @@ const listarFilme = async function() {
     try {
         //Chama a funão do DAO para retornar a lista de  todos os filmes
         let result = await filmeDAO.selectAllFilme()
-
+        
+        
         if(result){
-            if(result.length > 0){
+            if(result.length > 0){  
+                messageJson.DEFAULT_MESSAGE.status = messageJson.SUCCES_RESPONSE.status
+                messageJson.DEFAULT_MESSAGE.status_code = messageJson.SUCCES_RESPONSE.status_code
+                messageJson.DEFAULT_MESSAGE.response.count = result.length
+                messageJson.DEFAULT_MESSAGE.response.filme = result
 
+                return messageJson.DEFAULT_MESSAGE
+                
             }else{
-                return ERROR_NOT_FOUND
+                return messageJson.ERROR_NOT_FOUND
             }
         }else{
             return messageJson.ERROR_INTERNAL_SERVER_MODEL // 500
@@ -90,7 +100,42 @@ const listarFilme = async function() {
 }
 
 
-const buscarFilme = async function() {
+const buscarFilme = async function(id) {
+
+    // Clona o objeto de mensagens para evitar mutação do objeto original importado
+    // Isso garante que alterações feitas aqui não afetam outras chamadas da função
+    let messageJson = JSON.parse(JSON.stringify(config_message))
+
+    try {
+        //Válidação para garantir que o id seja válidos
+        if(id == '' || id == null || id == undefined || isNaN(id)){
+            messageJson.ERROR_BAD_REQUEST.field = '[ID INVÁLIDO]'
+
+            return messageJson.ERROR_BAD_REQUEST //400
+        }else{
+            let result = await filmeDAO.selectByIdFilme(id)
+
+            if(result){
+                if(result.length > 0){
+                    messageJson.DEFAULT_MESSAGE.status = messageJson.SUCCES_RESPONSE.status
+                    messageJson.DEFAULT_MESSAGE.status_code = messageJson.SUCCES_RESPONSE.status_code
+                    messageJson.DEFAULT_MESSAGE.response.filme = result
+
+                    return messageJson.DEFAULT_MESSAGE //200
+                }else{
+                    
+                    
+                    return messageJson.ERROR_NOT_FOUND //404
+                }
+            }else{
+                return messageJson.ERROR_INTERNAL_SERVER_MODEL //500 (model)
+            }
+        }
+            
+        
+    } catch (error) {
+        return messageJson.ERROR_INTERNAL_SERVER_CONTROLLER //500(controller)
+    }
 
 }
 
@@ -154,10 +199,10 @@ const validarDados = async function(filme) {
     // Validação do campo VALOR:
     // - Não pode ser vazio, nulo ou undefined
     // - Deve ser um valor numérico (isNaN retorna true se NÃO for número)
-    } else if (filme.valor == '' || filme.valor == null || filme.valor == undefined || filme.valor.split('.')[0].length > 3|| isNaN(filme.valor)) {
+    } else if (filme.valor == '' || filme.valor == null || filme.valor == undefined || filme.valor.toString().split('.')[0].length > 3|| isNaN(filme.valor)) {
 
         messageJson.ERROR_BAD_REQUEST.field = '[valor] INVÁLIDO'
-        return messageJson.ERROR_BAD_REQUEST  // HTTP 500
+        return messageJson.ERROR_BAD_REQUEST  // HTTP 400
 
     // Validação do campo CAPA
     // - Não pode ser nulo/undefined (verificado com !filme.capa)

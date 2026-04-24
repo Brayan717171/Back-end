@@ -46,8 +46,11 @@ values (
 #Seleciona todas as colunas da tbl_filme, trás todos os dados da tabela
 select * from tbl_filme;
 
+-- delete pelo (id 0 deleta todos os dados da tabela)
+DELETE FROM tbl_filme WHERE id > 0;
+
 -- delete pelo id do que você quer remover 
-DELETE FROM tbl_filme WHERE id = 6;
+DELETE FROM tbl_filme WHERE id = 0;
 
 -- Atualiza o ID do registro desejado
 -- WHERE id = 4        → identifica o registro atual (The Circus)

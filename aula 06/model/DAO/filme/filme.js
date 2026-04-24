@@ -106,6 +106,24 @@ const selectAllFilme = async function(){
 //Função para retornar os dados do filme filrando pelo id
 const selectByIdFilme = async function(id){
 
+    try {
+        let sql = `select * from tbl_filme where id=${id}`
+
+        //Executar o ScriptSql no banco de dados, para retornar os filmes
+        let result = await knexConex.raw(sql)
+
+        // Validação para verificar se o retorno no BD é uma array (Array.isArray)
+        //Se o ScriptSQL 
+        if(Array.isArray(result)){
+            return result[0]
+        }else{
+            return false
+        }
+
+    } catch (error) {
+        return false
+    }
+
 }
 
 
