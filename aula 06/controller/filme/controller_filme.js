@@ -54,7 +54,7 @@ const inseirNovoFilme = async function (filme, contentType) {
         }
 
     } catch (error) {
-        return message.ERROR_INTERNAL_SERVER_CONTROLLER
+        return messageJson.ERROR_INTERNAL_SERVER_CONTROLLER //500(controller)
     }
 }
 
@@ -65,6 +65,28 @@ const atualizarFilme = async function() {
 
 const listarFilme = async function() {
    
+    // Clona o objeto de mensagens para evitar mutação do objeto original importado
+    // Isso garante que alterações feitas aqui não afetam outras chamadas da função
+        let messageJson = JSON.parse(JSON.stringify(config_message))
+
+    try {
+        //Chama a funão do DAO para retornar a lista de  todos os filmes
+        let result = await filmeDAO.selectAllFilme()
+
+        if(result){
+            if(result.length > 0){
+
+            }else{
+                return ERROR_NOT_FOUND
+            }
+        }else{
+            return messageJson.ERROR_INTERNAL_SERVER_MODEL // 500
+        }
+
+    } catch (error) {
+        return messageJson.ERROR_INTERNAL_SERVER_CONTROLLER //500(controller)
+    }
+
 }
 
 

@@ -29,6 +29,7 @@ const ERROR_INTERNAL_SERVER_CONTROLLER   = {status : false, status_code: 500, me
 
 const ERROR_CONTENT_TYPE                 = {status : false, status_code: 415, message: 'Não foi possível processar a requisição pois o formato de dados aceitp pela APLI é somente JSON'}
 
+const ERROR_NOT_FOUND                    = {status : false, status_code: 404, message: 'Não foi encontrado nenhum dado para retorno'}
 
 
 //Mensagens de sucesso da API
