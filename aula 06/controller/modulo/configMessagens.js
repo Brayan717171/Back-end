@@ -27,7 +27,7 @@ const ERROR_INTERNAL_SERVER_MODEL        = {status : false, status_code: 500, me
 
 const ERROR_INTERNAL_SERVER_CONTROLLER   = {status : false, status_code: 500, message: 'Não foi possível procesar a requisição por conta de erro na API [ERRO NA CONTROLLER'}
 
-const ERROR_CONTENT_TYPE                 = {status : false, status_code: 415, message: 'Não foi possível processar a requisição pois o formato de dados aceitp pela APLI é somente JSON'}
+const ERROR_CONTENT_TYPE                 = {status : false, status_code: 415, message: 'Não foi possível processar a requisição pois o formato de dados aceito pela APLI é somente JSON'}
 
 const ERROR_NOT_FOUND                    = {status : false, status_code: 404, message: 'Não foi encontrado nenhum dado para retorno'}
 
@@ -35,7 +35,15 @@ const ERROR_NOT_FOUND                    = {status : false, status_code: 404, me
 //Mensagens de sucesso da API
 const SUCCES_CREATED_ITEM   = { status : true, status_code: 201, message: 'Registro inserido com sucesso' }
 
+//Retormos para GET
 const SUCCES_RESPONSE       =  { status : true, status_code: 200} 
+
+//Retornos para PUT
+const SUCCES_UPDATED_ITEM   = { status : true, status_code: 200, message: 'Registro atualizado com sucesso' }
+
+const SUCCES_DELETE_ITEM   = { status : true, status_code: 200, message: 'Registro deletado com sucesso' }
+
+
 module.exports = {
     DEFAULT_MESSAGE,
     ERROR_BAD_REQUEST,
@@ -44,5 +52,7 @@ module.exports = {
     ERROR_CONTENT_TYPE,
     ERROR_INTERNAL_SERVER_CONTROLLER,
     SUCCES_RESPONSE,
-    ERROR_NOT_FOUND
+    ERROR_NOT_FOUND,
+    SUCCES_UPDATED_ITEM,
+    SUCCES_DELETE_ITEM
 }

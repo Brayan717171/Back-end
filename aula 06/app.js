@@ -77,7 +77,39 @@ app.get('/v1/senai/locadora/filme/:id', async function (req, res){
     res.json(result)
      
   
-  })
+})
+
+
+app.put('/v1/senai/locadora/filme/:id', bodyParserJSON, async function (req, res){
+  //Recebe o contenty type da requisição
+  let contentType = req.headers['content-type']
+  //Recebe o ID do registro a ser atualizado
+  let id = req.params.id
+  //Recebe os dados enviados no corpo da requisição
+  let dados = req.body
+
+  //Chama a função de atualizar na controller e encaminha os dados, id e content type
+  //obedecendo a ordem de crição na função da controller
+  let result = await controllerFilme.atualizarFilme(dados, id, contentType)
+
+  res.status(result.status_code)
+  res.json(result)
+})
+
+app.delete('/v1/senai/locadora/filme/:id', bodyParserJSON, async function (req, res){
+  //Recebe o contenty type da requisição
+  let contentType = req.headers['content-type']
+  //Recebe o ID do registro a ser deletado
+  let id = req.params.id
+ 
+
+  //Chama a função de atualizar na controller e encaminha os dados, id e content type
+  //obedecendo a ordem de crição na função da controller
+  let result = await controllerFilme.excluirFilme(id, contentType)
+
+  res.status(result.status_code)
+  res.json(result)
+})
 
 app.use(cors(corsOption));
 const PORT = process.env.PORT || 8080;

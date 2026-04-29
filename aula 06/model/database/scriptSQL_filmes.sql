@@ -50,7 +50,8 @@ select * from tbl_filme;
 DELETE FROM tbl_filme WHERE id > 0;
 
 -- delete pelo id do que você quer remover 
-DELETE FROM tbl_filme WHERE id = 0;
+DELETE FROM tbl_filme 
+WHERE id = 11;
 
 -- Atualiza o ID do registro desejado
 -- WHERE id = 4        → identifica o registro atual (The Circus)
@@ -60,3 +61,14 @@ UPDATE tbl_filme SET id = 3 WHERE id = 5;
 
 
 desc tbl_filme;
+
+
+update tbl_filme set
+	nome = "Filme 03",
+	data_lancamento =  "2016-06-10", 
+	duracao = "01:34:00",
+	sinopse = "testando update de banco de dados. ",
+	avaliacao ="2",
+	valor = "100.50",
+	capa = "wadwwawdd"
+where id = 12;
