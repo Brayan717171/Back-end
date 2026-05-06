@@ -59,9 +59,11 @@ const incertFilme = async function(filme){
 
         //Executar o ScriptSql no banco de dados
         let result = await knexConex.raw(sql)
+      
+        
 
         if(result)
-            return true
+            return result[0].insertId
         else
             return false
 

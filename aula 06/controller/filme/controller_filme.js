@@ -38,11 +38,18 @@ const inseirNovoFilme = async function (filme, contentType) {
             // Todas as validações passaram — aciona o DAO para inserir no banco de dados
             let result = await filmeDAO.incertFilme(filme)
 
+
             if (result) {
                 // Inserção bem-sucedida: monta resposta com HTTP 201 (Created)
+
+                
+                filme.id = result
                 messageJson.DEFAULT_MESSAGE.status      = messageJson.SUCCES_CREATED_ITEM.status
                 messageJson.DEFAULT_MESSAGE.status_code = messageJson.SUCCES_CREATED_ITEM.status_code
                 messageJson.DEFAULT_MESSAGE.message     = messageJson.SUCCES_CREATED_ITEM.message
+                messageJson.DEFAULT_MESSAGE.response = filme
+                
+                
             } else {
                 // Falha na inserção no banco: monta resposta com HTTP 500
                 config_message.ERROR_INTERNAL_SERVER_MODEL // HTTP 500 - Internal Server Error
@@ -94,6 +101,7 @@ const atualizarFilme = async function(filme, id , contentType) {
                         messageJson.DEFAULT_MESSAGE.status = messageJson.SUCCES_UPDATED_ITEM.status
                         messageJson.DEFAULT_MESSAGE.status_code = messageJson.SUCCES_UPDATED_ITEM.status_code
                         messageJson.DEFAULT_MESSAGE.message = messageJson.SUCCES_UPDATED_ITEM.message
+                        messageJson.DEFAULT_MESSAGE.response = filme
 
                         return messageJson.DEFAULT_MESSAGE
 
@@ -169,7 +177,7 @@ const buscarFilme = async function(id) {
 
     try {
         //Válidação para garantir que o id seja válidos
-        if(id == '' || id == null || id == undefined || isNaN(id)){
+        if(id == undefined || id == '' || id == null ||  isNaN(id)){
             messageJson.ERROR_BAD_REQUEST.field = '[ID INVÁLIDO]'
 
             return messageJson.ERROR_BAD_REQUEST //400
@@ -201,24 +209,25 @@ const buscarFilme = async function(id) {
 }
 
 
-const excluirFilme = async function(id) { // Removi o contentType dos parâmetros
+const excluirFilme = async function(id) { 
     let messageJson = JSON.parse(JSON.stringify(config_message))
 
     try {
         
 
-        // Validação se o ID existe
+        // Validação se o ID existe, erro 400 e 404
         let resultBuscarID = await buscarFilme(id)
-
+        
+        //Validação se o status é verdadeiro(se existe o filme)
         if(resultBuscarID.status){
             // Chama a função do DAO para deletar o filme apenas pelo ID
             let result = await filmeDAO.deleteFilme(id)
 
             if(result){
                 // Retorno de sucesso
-                return messageJson.SUCCES_DELETE_ITEM 
+                return messageJson.SUCCES_DELETE_ITEM  //200
             } else {
-                return messageJson.ERROR_INTERNAL_SERVER_CONTROLLER // 500
+                return messageJson.ERROR_INTERNAL_SERVER_MODEL // 500
             }
         } else {
             return resultBuscarID // Retorna o 404 da busca caso o filme não exista
@@ -244,7 +253,7 @@ const validarDados = async function(filme) {
     // Validação do campo NOME:
     // - Não pode ser vazio, nulo ou undefined
     // - Não pode ultrapassar 80 caracteres (limite da coluna no banco)
-    if (filme.nome == '' || filme.nome == null || filme.nome == undefined || filme.nome.length > 80) {
+    if (filme.nome == undefined || filme.nome == '' || filme.nome == null ||  filme.nome.length > 80) {
 
         messageJson.ERROR_BAD_REQUEST.field = '[NOME] INVÁLIDO'
         return messageJson.ERROR_BAD_REQUEST  // HTTP 400
@@ -252,7 +261,7 @@ const validarDados = async function(filme) {
     // Validação do campo DATA_LANCAMENTO:
     // - Não pode ser vazio, nulo ou undefined
     // - Deve ter exatamente 10 caracteres (formato esperado: YYYY-MM-DD)
-    } else if (filme.data_lancamento == '' || filme.data_lancamento == null || filme.data_lancamento == undefined || filme.data_lancamento.length != 10) {
+    } else if (filme.data_lancamento == undefined || filme.data_lancamento == '' || filme.data_lancamento == null ||  filme.data_lancamento.length != 10) {
 
         messageJson.ERROR_BAD_REQUEST.field = '[data_lancamento] INVÁLIDO'
         return messageJson.ERROR_BAD_REQUEST  // HTTP 400
@@ -260,14 +269,14 @@ const validarDados = async function(filme) {
     // Validação do campo DURACAO:
     // - Não pode ser vazio, nulo ou undefined
     // - Deve ter no mínimo 5 caracteres (formato esperado: HH:MM)
-    } else if (filme.duracao == '' || filme.duracao == null || filme.duracao == undefined || filme.duracao.length < 5) {
+    } else if (filme.duracao == undefined || filme.duracao == '' || filme.duracao == null ||  filme.duracao.length < 5) {
 
         messageJson.ERROR_BAD_REQUEST.field = '[duração] INVÁLIDO'
         return messageJson.ERROR_BAD_REQUEST  // HTTP 400
 
     // Validação do campo SINOPSE:
     // - Não pode ser vazio, nulo ou undefined (sem limite de tamanho definido)
-    } else if (filme.sinopse == '' || filme.sinopse == null || filme.sinopse == undefined) {
+    } else if (filme.sinopse == undefined || filme.sinopse == '' || filme.sinopse == null || filme.sinopse == undefined) {
 
         messageJson.ERROR_BAD_REQUEST.field = '[sinopse] INVÁLIDO'
         return messageJson.ERROR_BAD_REQUEST  // HTTP 400
@@ -284,7 +293,7 @@ const validarDados = async function(filme) {
     // Validação do campo VALOR:
     // - Não pode ser vazio, nulo ou undefined
     // - Deve ser um valor numérico (isNaN retorna true se NÃO for número)
-    } else if (filme.valor == '' || filme.valor == null || filme.valor == undefined || filme.valor.toString().split('.')[0].length > 3|| isNaN(filme.valor)) {
+    } else if (filme.valor == undefined || filme.valor == '' || filme.valor == null ||  filme.valor.toString().split('.')[0].length > 3|| isNaN(filme.valor)) {
 
         messageJson.ERROR_BAD_REQUEST.field = '[valor] INVÁLIDO'
         return messageJson.ERROR_BAD_REQUEST  // HTTP 400

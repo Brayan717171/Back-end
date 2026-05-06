@@ -44,6 +44,8 @@ const SUCCES_UPDATED_ITEM   = { status : true, status_code: 200, message: 'Regis
 const SUCCES_DELETE_ITEM   = { status : true, status_code: 200, message: 'Registro deletado com sucesso' }
 
 
+
+
 module.exports = {
     DEFAULT_MESSAGE,
     ERROR_BAD_REQUEST,
